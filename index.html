@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaurav Meena | Full-Stack Developer & AI Enthusiast</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        :root {
+            --bg-color: #0d1117;
+            --secondary-bg: #161b22;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-muted: #8b949e;
+            --link-color: #58a6ff;
+            --color-green: #2ea043;
+            --color-green-hover: #2c974b;
+            --yellow: #e3b341;
+            --blue: #3178c6;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            --cal-level-0: #161b22;
+            --cal-level-1: #0e4429;
+            --cal-level-2: #006d32;
+            --cal-level-3: #26a641;
+            --cal-level-4: #39d353;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .app-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            display: flex;
+            gap: 32px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 296px;
+            flex-shrink: 0;
+        }
+        .profile-header {
+            margin-bottom: 16px;
+        }
+        .avatar {
+            width: 296px;
+            height: 296px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            object-fit: cover;
+            margin-bottom: 16px;
+            display: block;
+        }
+        .names h1 {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--text-primary);
+        }
+        .names h2 {
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 1.25;
+        }
+        .bio {
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+        .actions {
+            margin-bottom: 16px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 5px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--secondary-bg);
+            color: var(--text-primary);
+            transition: .2s cubic-bezier(0.3, 0, 0.5, 1);
+        }
+        .btn:hover {
+            background-color: #30363d;
+            border-color: #8b949e;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background-color: var(--color-green);
+            color: #ffffff;
+            border-color: rgba(240, 246, 252, 0.1);
+            width: 100%;
+            text-align: center;
+        }
+        .btn-primary:hover {
+            background-color: var(--color-green-hover);
+            border-color: rgba(240, 246, 252, 0.1);
+        }
+
+        .details-list {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+        .details-list li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+        .details-list svg {
+            fill: var(--text-muted);
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .social-links {
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+            margin-bottom: 16px;
+        }
+
+        .skills-section {
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+        }
+        .skills-section h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .badge-pill {
+            padding: 0 10px;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 22px;
+            color: var(--link-color);
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            border-radius: 2em;
+            background-color: rgba(56, 139, 253, 0.1);
+            cursor: default;
+        }
+        .badge-pill:hover {
+            background-color: rgba(56, 139, 253, 0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .underline-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+        .nav-item {
+            padding: 8px 16px;
+            font-size: 14px;
+            color: var(--text-primary);
+            border-bottom: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            margin-bottom: -1px;
+        }
+        .nav-item:hover {
+            border-bottom-color: var(--text-muted);
+            text-decoration: none;
+        }
+        .nav-item.active {
+            border-bottom-color: #f78166;
+            font-weight: 600;
+        }
+        .nav-item .badge {
+            background-color: rgba(110, 118, 129, 0.4);
+            color: var(--text-primary);
+            border-radius: 2em;
+            padding: 0 6px;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 18px;
+            display: inline-block;
+        }
+        .nav-item svg {
+            fill: var(--text-muted);
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .input-search {
+            flex: 1;
+            padding: 5px 12px;
+            font-size: 14px;
+            line-height: 20px;
+            color: var(--text-primary);
+            vertical-align: middle;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            outline: none;
+            min-width: 200px;
+            transition: 0.2s ease-in-out;
+        }
+        .input-search:focus {
+            border-color: var(--link-color);
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .filter-buttons .btn.active {
+            background-color: #1f6feb;
+            color: #fff;
+            border-color: #1f6feb;
+        }
+
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .repo-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            overflow: hidden;
+        }
+        .repo-card:hover {
+            border-color: var(--text-muted);
+        }
+        .repo-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--secondary-bg);
+        }
+        .repo-content {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .repo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .repo-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--link-color);
+            word-break: break-word;
+        }
+        .repo-badge {
+            font-size: 12px;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            border-radius: 2em;
+            padding: 0 7px;
+            line-height: 18px;
+        }
+        .repo-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            flex: 1;
+        }
+        .repo-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 16px;
+        }
+        .topic-tag {
+            background-color: rgba(56, 139, 253, 0.1);
+            color: var(--link-color);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 0 7px;
+            line-height: 22px;
+            border-radius: 2em;
+        }
+        .repo-footer {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .repo-lang {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .lang-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .repo-stars {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .repo-stars svg {
+            fill: var(--text-muted);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Contribution Graph */
+        .contribution-section {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 40px;
+        }
+        .contribution-section h3 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+        .calendar-graph {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-rows: repeat(7, 10px);
+            grid-auto-flow: column;
+            grid-auto-columns: 10px;
+            gap: 3px;
+        }
+        .calendar-square {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background-color: var(--cal-level-0);
+            outline: 1px solid rgba(255, 255, 255, 0.05);
+            outline-offset: -1px;
+        }
+        .calendar-square[data-level="1"] { background-color: var(--cal-level-1); }
+        .calendar-square[data-level="2"] { background-color: var(--cal-level-2); }
+        .calendar-square[data-level="3"] { background-color: var(--cal-level-3); }
+        .calendar-square[data-level="4"] { background-color: var(--cal-level-4); }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 24px;
+            margin-top: 40px;
+        }
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-links a {
+            color: var(--link-color);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 24px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: 0.2s;
+        }
+        .modal-close:hover {
+            background: var(--border-color);
+        }
+        .modal-hero-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .modal-body {
+            padding: 24px;
+        }
+        .modal-body h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .modal-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        .modal-section {
+            margin-bottom: 24px;
+        }
+        .modal-section h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+            color: var(--text-primary);
+        }
+        .modal-section p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .avatar {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto 16px;
+            }
+            .repo-grid {
+                grid-template-columns: 1fr;
+            }
+            .filter-bar {
+                flex-direction: column;
+            }
+            .filter-buttons {
+                flex-wrap: wrap;
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-header">
+                <img src="./github_portfolio/assets/gauravPassport.jpeg" alt="Gaurav Meena" class="avatar" />
+                <div class="names">
+                    <h1>Gaurav Meena</h1>
+                    <h2>@gaurav-dev</h2>
+                </div>
+            </div>
+            
+            <div class="bio">
+                Full-Stack Developer | AI Enthusiast | 400+ LeetCode | Building apps that solve real problems
+            </div>
+            
+            <div class="actions">
+                <a href="https://github.com/Gaurav-meena95" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: block; box-sizing: border-box;">Follow</a>
+            </div>
+            
+            <ul class="details-list">
+                <li>
+                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16"><path d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.193 6.5 6.5 0 0 1 0 9.193Zm-1.06-8.132v-.001a5 5 0 1 0-7.072 7.072L8 14.07l3.536-3.534a5 5 0 0 0 0-7.072ZM8 9a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 9Z"></path></svg> 
+                    Bhopal, India
+                </li>
+                <li>
+                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .139.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"></path></svg> 
+                    <a href="mailto:gaurav.meena2024@nst.rishihood.edu.in">gaurav.meena2024@nst.rishihood.edu.in</a>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> 
+                    +91 77240 14495
+                </li>
+            </ul>
+
+            <div class="social-links">
+                <ul class="details-list">
+                    <li><svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg> <a href="https://www.linkedin.com/in/gaurav-meena-3917b2323/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    <li><svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg> <a href="https://github.com/Gaurav-meena95?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg> <a href="https://leetcode.com/u/Gaurav_meena95/" target="_blank" rel="noopener noreferrer">LeetCode</a></li>
+                    <li><svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg> <a href="https://www.codechef.com/users/gaurav_meena95" target="_blank" rel="noopener noreferrer">CodeChef</a></li>
+                    <li><svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg> <a href="https://codeforces.com/profile/G.meena" target="_blank" rel="noopener noreferrer">Codeforces</a></li>
+                    <li><svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg> <a href="https://gaurav-portfolio-v2-siso.vercel.app/" target="_blank" rel="noopener noreferrer">Personal Portfolio</a></li>
+                </ul>
+            </div>
+
+            <div class="skills-section">
+                <h3>Skills</h3>
+                <div class="badges">
+                    <span class="badge-pill">React</span>
+                    <span class="badge-pill">Node.js</span>
+                    <span class="badge-pill">Python</span>
+                    <span class="badge-pill">TypeScript</span>
+                    <span class="badge-pill">React Native</span>
+                    <span class="badge-pill">Next.js</span>
+                    <span class="badge-pill">MongoDB</span>
+                    <span class="badge-pill">PostgreSQL</span>
+                    <span class="badge-pill">LangChain</span>
+                    <span class="badge-pill">LangGraph</span>
+                    <span class="badge-pill">FastAPI</span>
+                    <span class="badge-pill">Tailwind CSS</span>
+                    <span class="badge-pill">Figma</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <nav class="underline-nav">
+                <a href="#" class="nav-item active">
+                    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="octicon"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"></path></svg>
+                    Repositories 
+                    <span class="badge" id="repo-count">8</span>
+                </a>
+            </nav>
+
+            <div class="filter-bar">
+                <input type="text" id="search-input" placeholder="Find a repository..." class="form-control input-search" />
+                <div class="filter-buttons">
+                    <button class="btn active" data-filter="All">All</button>
+                    <button class="btn" data-filter="Full-Stack">Full-Stack</button>
+                    <button class="btn" data-filter="AI/ML">AI/ML</button>
+                    <button class="btn" data-filter="Mobile">Mobile</button>
+                    <button class="btn" data-filter="Open Source">Open Source</button>
+                </div>
+            </div>
+            
+            <div class="repo-grid" id="repo-grid">
+                <!-- Dynamically generated repo cards -->
+            </div>
+            
+            <div class="contribution-section">
+                <h3 id="contributions-title">... contributions in the last year</h3>
+                <div class="calendar-graph">
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; <span id="year"></span> Gaurav Meena. Inspired by GitHub profile layout.</p>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/gaurav-meena-3917b2323/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/Gaurav-meena95" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:gaurav.meena2024@nst.rishihood.edu.in">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <img id="modal-image" src="" alt="Project Cover" class="modal-hero-img" />
+            <div class="modal-body">
+                <h2 id="modal-title">Project Title</h2>
+                <div class="modal-tags" id="modal-tags"></div>
+                <p class="modal-desc" id="modal-desc"></p>
+                
+                <div class="modal-section">
+                    <h3>Objective</h3>
+                    <p id="modal-objective"></p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Impact</h3>
+                    <p id="modal-impact"></p>
+                </div>
+                
+                <div class="modal-actions">
+                    <a href="#" class="btn btn-primary">View Live Demo</a>
+                    <a href="#" class="btn">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const projects = [
+            {
+                title: 'Form-Filling-Agent',
+                description: 'An intelligent AI agent that automates complex form filling processes using conversational natural language processing.',
+                objective: 'To reduce manual data entry efforts by parsing natural language into structured forms seamlessly.',
+                impact: 'Saves hours of repetitive work for businesses and improves accuracy of digital submissions.',
+                category: 'AI/ML',
+                tech: ['FastAPI', 'LangGraph', 'React'],
+                language: 'Python',
+                langColor: 'var(--yellow)',
+                stars: 12,
+                image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=600'
+            },
+            {
+                title: 'Student-Github-Reviewer',
+                description: 'AI portfolio analyzer that automatically evaluates and scores student GitHub profiles and codebases.',
+                objective: 'Provide automated, constructive, and highly personalized feedback on student code to accelerate learning.',
+                impact: 'Helps students improve code quality and confidently align their portfolios with industry standards.',
+                category: 'AI/ML',
+                tech: ['FastAPI', 'Streamlit', 'Groq'],
+                language: 'Python',
+                langColor: 'var(--yellow)',
+                stars: 8,
+                image: 'https://images.unsplash.com/photo-1607799279861-4dddf8473d71?auto=format&fit=crop&q=80&w=600'
+            },
+            {
+                title: 'JewelTrackApp',
+                description: 'Cross-platform mobile inventory application specifically designed for managing high-value jewelry stock.',
+                objective: 'Create a seamless mobile experience for tracking and auditing high-value inventory on the go.',
+                impact: 'Streamlines regular inventory audits and improves real-time stock visibility for retail jewelry stores.',
+                category: 'Mobile',
+                tech: ['React Native', 'Expo', 'MongoDB'],
+                language: 'React Native',
+                langColor: 'var(--color-green)',
+                stars: 15,
+                image: 'https://images.unsplash.com/photo-1599643478524-fb66f7f2b1f6?auto=format&fit=crop&q=80&w=600'
+            },
+            {
+                title: 'JewelTrack-Web',
+                description: 'Comprehensive web-based inventory management system and administration dashboard for jewelry tracking.',
+                objective: 'Build a robust web administration panel handling complex operations like invoicing, returns, and reports.',
+                impact: 'Enables store managers to handle complex logistics and make data-driven decisions via an intuitive interface.',
+                category: 'Full-Stack',
+                tech: ['React', 'Node', 'Tailwind'],
+                language: 'TypeScript',
+                langColor: 'var(--blue)',
+                stars: 20,
+                image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600'
+            },
+            {
+                title: 'Quick-Serve',
+                description: 'A lightning-fast, real-time digital menu and restaurant ordering system to synchronize kitchen and tables.',
+                objective: 'Modernize restaurant point-of-sale systems and optimize communication between diners and the kitchen.',
+                impact: 'Dramatically reduces order delays, prevents communication errors, and improves overall customer satisfaction.',
+                category: 'Full-Stack',
+                tech: ['React', 'PostgreSQL', 'Express'],
+                language: 'JavaScript',
+                langColor: 'var(--blue)',
+                stars: 18,
+                image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=600'
+            },
+            {
+                title: 'Voice-Soil-Advisory',
+                description: 'MumbaiHacks award-winning project providing critical agricultural and soil advisory via accessible voice AI.',
+                objective: 'Deliver advanced soil insights to rural farmers entirely through intuitive voice interfaces.',
+                impact: 'Bridges the digital divide, empowering farmers with actionable, localized insights despite literacy barriers.',
+                category: 'AI/ML',
+                tech: ['Voice', 'AI', 'Python'],
+                language: 'Python',
+                langColor: 'var(--yellow)',
+                stars: 42,
+                image: 'https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&q=80&w=600'
+            },
+            {
+                title: 'Carmaacarcare-Features',
+                description: 'Innovative integration of a dynamic weather topbar and an engaging rewards system for a mobile car care app.',
+                objective: 'Enhance a standard car servicing application with highly contextual features to keep users coming back.',
+                impact: 'Increased daily active users by gamifying interactions and providing highly relevant localized weather data.',
+                category: 'Mobile',
+                tech: ['React Native', 'Context API'],
+                language: 'React Native',
+                langColor: 'var(--color-green)',
+                stars: 5,
+                image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0be2?auto=format&fit=crop&q=80&w=600'
+            },
+            {
+                title: 'Gistly-AI-Frontend',
+                description: 'A beautifully crafted, highly reusable component library optimized for building rapid AI frontend prototypes.',
+                objective: 'Create a scalable, accessible design system tailored specifically for conversational AI applications.',
+                impact: 'Accelerated development across multiple AI products by standardizing UI components into one reliable package.',
+                category: 'Full-Stack',
+                tech: ['React', 'Framer Motion'],
+                language: 'TypeScript',
+                langColor: 'var(--blue)',
+                stars: 10,
+                image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600'
+            }
+        ];
+
+        const searchInput = document.getElementById('search-input');
+        const filterBtns = document.querySelectorAll('.filter-buttons .btn');
+        const repoGrid = document.getElementById('repo-grid');
+
+        function renderProjects(filter = 'All', search = '') {
+            repoGrid.innerHTML = '';
+            
+            const filtered = projects.filter(p => {
+                const matchesFilter = filter === 'All' || p.category === filter;
+                const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase()) || 
+                                      p.description.toLowerCase().includes(search.toLowerCase());
+                return matchesFilter && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                repoGrid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1 / -1; padding: 24px 0;">No repositories found matching your search.</p>';
+            }
+
+            filtered.forEach((p, index) => {
+                // Find original index for modal
+                const originalIndex = projects.findIndex(orig => orig.title === p.title);
+                
+                const card = document.createElement('div');
+                card.className = 'repo-card';
+                card.onclick = () => openModal(originalIndex);
+                
+                card.innerHTML = `
+                    <img src="${p.image}" class="repo-image" alt="${p.title}" loading="lazy" />
+                    <div class="repo-content">
+                        <div class="repo-header">
+                            <h3 class="repo-title">${p.title}</h3>
+                            <span class="repo-badge">Public</span>
+                        </div>
+                        <p class="repo-desc">${p.description}</p>
+                        <div class="repo-topics">
+                            ${p.tech.map(t => `<span class="topic-tag">${t}</span>`).join('')}
+                        </div>
+                        <div class="repo-footer">
+                            <div class="repo-lang">
+                                <span class="lang-color" style="background-color: ${p.langColor}"></span>
+                                ${p.language}
+                            </div>
+                            <div class="repo-stars">
+                                <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="octicon"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"></path></svg>
+                                ${p.stars}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                repoGrid.appendChild(card);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const activeFilter = document.querySelector('.filter-buttons .btn.active').dataset.filter;
+            renderProjects(activeFilter, e.target.value);
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderProjects(btn.dataset.filter, searchInput.value);
+            });
+        });
+
+        // Initialize projects
+        renderProjects();
+
+        // Modal Logic
+        const modal = document.getElementById('modal');
+        const modalClose = document.getElementById('modal-close');
+
+        function openModal(index) {
+            const p = projects[index];
+            document.getElementById('modal-image').src = p.image;
+            document.getElementById('modal-title').textContent = p.title;
+            document.getElementById('modal-desc').textContent = p.description;
+            document.getElementById('modal-objective').textContent = p.objective;
+            document.getElementById('modal-impact').textContent = p.impact;
+            
+            document.getElementById('modal-tags').innerHTML = p.tech.map(t => `<span class="topic-tag">${t}</span>`).join('');
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Generate Contribution Graph
+        const grid = document.getElementById('calendar-grid');
+        let totalContributions = 0;
+        
+        // 52 weeks * 7 days
+        for (let i = 0; i < 364; i++) {
+            const square = document.createElement('div');
+            square.className = 'calendar-square';
+            
+            // Generate realistic looking contribution pattern (more empty squares, some dense patches)
+            let level = 0;
+            if (Math.random() > 0.4) {
+                const rand = Math.random();
+                if (rand > 0.8) level = 4;
+                else if (rand > 0.5) level = 3;
+                else if (rand > 0.2) level = 2;
+                else level = 1;
+                
+                totalContributions += (level * (Math.floor(Math.random() * 3) + 1));
+            }
+            
+            square.dataset.level = level;
+            grid.appendChild(square);
+        }
+        
+        document.getElementById('contributions-title').textContent = `${totalContributions.toLocaleString()} contributions in the last year`;
+
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
